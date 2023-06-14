@@ -17,3 +17,9 @@ for row in csv_reader:
 # Imprimir la lista de diccionarios
 for item in data:
     print(item)
+    
+    
+'''
+nombre = data[0]['name']
+print(nombre)
+'''
