@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentación Google con Bootstrap</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container my-5">
+        <h1 class="text-center mb-4">Presentación Integrada</h1>
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-10">
+                <!-- iframe para la presentación -->
+                <div class="ratio ratio-16x9">
+                    <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQ01szurWA-scYeMd9IN2iOTRyuG0W_zXfTl7RsI2GoWEFirdxK3LHBl3u8mKr932vcwtpS-LQFX9I0/embed?start=false&loop=false&delayms=3000" frameborder="0" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+                </div>
+            </div>
+        </div>
+        <footer class="text-center mt-5">
+            <p>Plantilla publicada en <a href="https://github.com/profeInformatica101/p5.js" target="_blank">GitHub</a>. Ejemplo visible en <a href="https://profeinformatica101.github.io/p5.js/" target="_blank">profeinformatica101.github.io/p5.js</a>.</p>
+        </footer>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

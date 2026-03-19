@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diccionario Interactivo de Seguridad Informática</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .dictionary {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+        .term {
+            width: 200px;
+            padding: 10px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .term:hover {
+            background-color: #eef;
+        }
+        #definition {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: justify;
+        }
+    </style>
+    <script>
+        const definitions = {
+            "Seguridad informática": "Conjunto de técnicas y prácticas destinadas a proteger la información y los sistemas de acceso no autorizado, daños o interrupciones.",
+            "Ubicación y protección física": "Medidas para garantizar que los equipos y servidores estén en lugares seguros, protegidos contra acceso físico no autorizado y condiciones ambientales adversas.",
+            "Sistemas de alimentación ininterrumpida": "Dispositivos que suministran energía eléctrica temporal para proteger equipos durante cortes de luz.",
+            "Almacenamiento de la información": "Métodos para guardar datos, considerando su rendimiento, disponibilidad y facilidad de acceso.",
+            "Almacenamiento redundante y distribuido": "Técnicas para replicar datos en múltiples ubicaciones para mejorar la seguridad y disponibilidad.",
+            "Criptografía": "Ciencia que protege la información mediante el uso de algoritmos que la hacen ilegible para usuarios no autorizados.",
+            "Copias de seguridad": "Procedimientos para duplicar información, garantizando su recuperación en caso de pérdida o daño.",
+            "Identificación digital": "Métodos para verificar la identidad de usuarios, como certificados digitales y credenciales electrónicas.",
+            "Sistemas biométricos de identificación": "Tecnologías que usan características físicas únicas, como huellas dactilares o reconocimiento facial, para identificar a las personas.",
+            "Firma electrónica": "Herramientas para garantizar la autenticidad y validez de documentos digitales.",
+            "Cortafuegos": "Software o dispositivos que controlan el tráfico de red, permitiendo o bloqueando comunicaciones según políticas definidas.",
+            "Listas de control de acceso": "Reglas que determinan quién puede acceder a recursos específicos en un sistema.",
+            "Software malicioso": "Programas diseñados para dañar, infiltrarse o robar información de sistemas informáticos.",
+            "Auditorías de seguridad": "Evaluaciones para identificar vulnerabilidades y verificar el cumplimiento de políticas de seguridad.",
+            "Privacidad de la información": "Prácticas para proteger los datos personales y evitar su exposición o uso no autorizado.",
+        };
+
+        function showDefinition(term) {
+            const definition = definitions[term] || "Definición no disponible.";
+            document.getElementById('definition').innerText = `${term}: ${definition}`;
+        }
+    </script>
+</head>
+<body>
+    <h1>Diccionario Interactivo de Seguridad Informática</h1>
+    <div class="dictionary">
+        <div class="term" onclick="showDefinition('Seguridad informática')">Seguridad informática</div>
+        <div class="term" onclick="showDefinition('Ubicación y protección física')">Ubicación y protección física</div>
+        <div class="term" onclick="showDefinition('Sistemas de alimentación ininterrumpida')">Sistemas de alimentación ininterrumpida</div>
+        <div class="term" onclick="showDefinition('Almacenamiento de la información')">Almacenamiento de la información</div>
+        <div class="term" onclick="showDefinition('Almacenamiento redundante y distribuido')">Almacenamiento redundante</div>
+        <div class="term" onclick="showDefinition('Criptografía')">Criptografía</div>
+        <div class="term" onclick="showDefinition('Copias de seguridad')">Copias de seguridad</div>
+        <div class="term" onclick="showDefinition('Identificación digital')">Identificación digital</div>
+        <div class="term" onclick="showDefinition('Sistemas biométricos de identificación')">Biometría</div>
+        <div class="term" onclick="showDefinition('Firma electrónica')">Firma electrónica</div>
+        <div class="term" onclick="showDefinition('Cortafuegos')">Cortafuegos</div>
+        <div class="term" onclick="showDefinition('Listas de control de acceso')">Listas de acceso</div>
+        <div class="term" onclick="showDefinition('Software malicioso')">Malware</div>
+        <div class="term" onclick="showDefinition('Auditorías de seguridad')">Auditorías</div>
+        <div class="term" onclick="showDefinition('Privacidad de la información')">Privacidad</div>
+    </div>
+    <div id="definition">
+        Haz clic en un término para ver su definición.
+    </div>
+</body>
+</html>

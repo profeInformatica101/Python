@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infraestructura de Usuarios, Grupos y Permisos con AAA</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        code {
+            display: block;
+            background: #f4f4f4;
+            padding: 10px;
+            border: 1px solid #ddd;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+        ul {
+            margin: 10px 0;
+            padding: 0 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Infraestructura de Usuarios, Grupos y Permisos con AAA</h1>
+    <p>En esta guía aprenderás a implementar una infraestructura de usuarios y permisos basada en el modelo AAA (Authentication, Authorization, Accounting) en un sistema Linux.</p>
+
+    <h2>Modelo AAA</h2>
+    <p>El modelo AAA se compone de tres elementos fundamentales:</p>
+    <ul>
+        <li><strong>Authentication (Autenticación):</strong> Identificación segura de los usuarios mediante nombres de usuario y contraseñas.</li>
+        <li><strong>Authorization (Autorización):</strong> Control de acceso a recursos del sistema según los permisos asignados.</li>
+        <li><strong>Accounting (Registro y Auditoría):</strong> Registro de las actividades de los usuarios para garantizar trazabilidad y seguridad.</li>
+    </ul>
+
+    <h2>1. Crear Usuarios</h2>
+    <p>Ejecuta los siguientes comandos para crear los usuarios y asignarles contraseñas:</p>
+    <code>
+sudo useradd -m -s /bin/bash admin<br>
+echo "admin:admin1234" | sudo chpasswd<br><br>
+
+sudo useradd -m -s /bin/bash juan<br>
+echo "juan:juan1234" | sudo chpasswd<br><br>
+
+sudo useradd -m -s /bin/bash maria<br>
+echo "maria:maria1234" | sudo chpasswd<br><br>
+
+sudo useradd -m -s /bin/bash lucas<br>
+echo "lucas:lucas1234" | sudo chpasswd
+    </code>
+    <p><strong>Relación con AAA:</strong> Estos comandos implementan la autenticación al crear usuarios únicos con credenciales seguras almacenadas en el sistema.</p>
+
+    <h2>2. Crear Grupos</h2>
+    <p>Define los grupos necesarios y asigna usuarios a estos grupos:</p>
+    <code>
+sudo groupadd administradores<br>
+sudo usermod -aG administradores admin<br><br>
+
+sudo groupadd desarrollo<br>
+sudo usermod -aG desarrollo juan<br>
+sudo usermod -aG desarrollo maria<br><br>
+
+sudo groupadd testing<br>
+sudo usermod -aG testing lucas
+    </code>
+    <p><strong>Relación con AAA:</strong> La autorización se aplica al definir qué grupos tienen acceso a recursos específicos en el sistema.</p>
+
+    <h2>3. Crear Directorios y Permisos</h2>
+    <p>Crea los directorios y establece permisos específicos según los grupos:</p>
+
+    <h3>/home/admin</h3>
+    <code>
+sudo mkdir -p /home/admin<br>
+sudo chown admin:administradores /home/admin<br>
+sudo chmod 700 /home/admin
+    </code>
+    <p><strong>Relación con AAA:</strong> El directorio personal de cada usuario tiene permisos exclusivos, asegurando que solo el propietario pueda acceder.</p>
+
+    <h3>/proyectos</h3>
+    <code>
+sudo mkdir -p /proyectos<br>
+sudo chown admin:desarrollo /proyectos<br>
+sudo chmod 770 /proyectos<br>
+sudo setfacl -m g:testing:rx /proyectos
+    </code>
+    <p><strong>Relación con AAA:</strong> Los permisos de lectura/escritura para el grupo <code>desarrollo</code> y de solo lectura para <code>testing</code> implementan la autorización.</p>
+
+    <h3>/testing</h3>
+    <code>
+sudo mkdir -p /testing<br>
+sudo chown lucas:testing /testing<br>
+sudo chmod 770 /testing<br>
+sudo setfacl -m g:administradores:rx /testing
+    </code>
+    <p><strong>Relación con AAA:</strong> La autorización asegura que solo los usuarios necesarios accedan a los recursos.</p>
+
+    <h2>4. Habilitar Auditoría</h2>
+    <p>Registra las actividades de los usuarios en el sistema:</p>
+    <code>
+sudo apt install auditd -y<br>
+sudo auditctl -a always,exit -F dir=/proyectos -F perm=rwx -k proyectos_audit<br>
+sudo auditctl -a always,exit -F dir=/testing -F perm=rwx -k testing_audit
+    </code>
+    <p>Consulta los logs de auditoría con el comando:</p>
+    <code>
+sudo ausearch -k proyectos_audit<br>
+sudo ausearch -k testing_audit
+    </code>
+    <p><strong>Relación con AAA:</strong> El registro y auditoría aseguran que todas las actividades en los directorios monitoreados sean rastreables.</p>
+
+    <h2>5. Resumen</h2>
+    <p>En este ejemplo:</p>
+    <ul>
+        <li><strong>Autenticación:</strong> Los usuarios se crean con credenciales únicas.</li>
+        <li><strong>Autorización:</strong> Se definen permisos específicos para los usuarios y grupos en los directorios.</li>
+        <li><strong>Registro y Auditoría:</strong> Se habilita auditoría en los directorios críticos para rastrear accesos y modificaciones.</li>
+    </ul>
+</body>
+</html>

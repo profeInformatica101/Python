@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thymeleaf Tags Accordion</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        h1 {
+            color: #28a745;
+        }
+    </style>
+</head>
+<body>
+<div class="container mt-5">
+    <h1><i class="fas fa-leaf"></i> Etiquetas más comunes de Thymeleaf</h1>
+    <div class="accordion" id="thymeleafAccordion">
+        <!-- Etiquetas de control de flujo -->
+        <!-- th:if y th:unless -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingIfUnless">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseIfUnless" aria-expanded="false" aria-controls="collapseIfUnless">
+                    <i class="fas fa-code-branch me-2"></i> Condiciones: th:if y th:unless
+                </button>
+            </h2>
+            <div id="collapseIfUnless" class="accordion-collapse collapse show" aria-labelledby="headingIfUnless" data-bs-parent="#thymeleafAccordion">
+                <div class="accordion-body">
+                    <strong>th:if</strong> permite mostrar u ocultar elementos HTML en función de una condición.
+                    <pre><code>&lt;p th:if="${condition}"&gt;Este párrafo se muestra si 'condition' es verdadero.&lt;/p&gt;</code></pre>
+                    <strong>th:unless</strong> es el opuesto de <code>th:if</code>, y se muestra cuando la condición es falsa.
+                    <pre><code>&lt;p th:unless="${condition}"&gt;Este párrafo se muestra si 'condition' es falso.&lt;/p&gt;</code></pre>
+                </div>
+            </div>
+        </div>
+        <!-- th:each -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingEach">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseEach" aria-expanded="false" aria-controls="collapseEach">
+                    <i class="fas fa-list-ul me-2"></i> Iteración: th:each
+                </button>
+            </h2>
+            <div id="collapseEach" class="accordion-collapse collapse" aria-labelledby="headingEach" data-bs-parent="#thymeleafAccordion">
+                <div class="accordion-body">
+                    <strong>th:each</strong> se utiliza para iterar sobre una colección y generar elementos HTML para cada elemento de la colección.
+                    <pre><code>&lt;ul&gt;
+    &lt;li th:each="item : ${items}" th:text="${item}"&gt;Elemento de la lista&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+                    Ejemplo: Si <code>items = ["Uno", "Dos", "Tres"]</code>, se generará una lista con tres elementos: Uno, Dos, Tres.
+                </div>
+            </div>
+        </div>
+        <!-- Etiquetas para formularios -->
+        <!-- th:object y th:field -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingObjectField">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseObjectField" aria-expanded="false" aria-controls="collapseObjectField">
+                    <i class="fas fa-object-group me-2"></i> Formularios: th:object y th:field
+                </button>
+            </h2>
+            <div id="collapseObjectField" class="accordion-collapse collapse" aria-labelledby="headingObjectField" data-bs-parent="#thymeleafAccordion">
+                <div class="accordion-body">
+                    <strong>th:object</strong> y <strong>th:field</strong> se utilizan para vincular campos de un formulario a propiedades de un objeto.
+                    <pre><code>&lt;form th:object="${user}" th:action="@{/guardar}" method="post"&gt;
+    &lt;label for="name"&gt;Nombre:&lt;/label&gt;
+    &lt;input type="text" id="name" th:field="*{name}" /&gt;
+    &lt;label for="email"&gt;Email:&lt;/label&gt;
+    &lt;input type="text" id="email" th:field="*{email}" /&gt;
+    &lt;button type="submit"&gt;Guardar&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+                </div>
+            </div>
+        </div>
+        <!-- th:value -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingValue">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseValue" aria-expanded="false" aria-controls="collapseValue">
+                    <i class="fas fa-keyboard me-2"></i> Formularios: th:value
+                </button>
+            </h2>
+            <div id="collapseValue" class="accordion-collapse collapse" aria-labelledby="headingValue" data-bs-parent="#thymeleafAccordion">
+                <div class="accordion-body">
+                    <strong>th:value</strong> se utiliza para establecer el valor de un atributo <code>value</code> en un elemento <code>input</code> o similar.
+                    <pre><code>&lt;input type="text" th:value="${inputValue}" placeholder="Escriba algo aquí"&gt;</code></pre>
+                    Ejemplo: Si <code>inputValue = "Hola"</code>, el campo de texto tendrá el valor "Hola".
+                </div>
+            </div>
+        </div>
+        <!-- Etiquetas de contenido dinámico -->
+        <!-- th:text -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingText">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseText" aria-expanded="false" aria-controls="collapseText">
+                    <i class="fas fa-font me-2"></i> Contenido: th:text
+                </button>
+            </h2>
+            <div id="collapseText" class="accordion-collapse collapse" aria-labelledby="headingText" data-bs-parent="#thymeleafAccordion">
+                <div class="accordion-body">
+                    <strong>th:text</strong> se utiliza para establecer el contenido de texto de un elemento HTML.
+                    <pre><code>&lt;p th:text="${message}"&gt;Este texto será reemplazado por el contenido de 'message' si está presente.&lt;/p&gt;</code></pre>
+                    Ejemplo: Si <code>message = "Hola Mundo"</code>, el resultado será un párrafo que contiene "Hola Mundo".
+                </div>
+            </div>
+        </div>
+        <!-- Etiquetas para enlaces y selección -->
+        <!-- th:href -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingHref">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHref" aria-expanded="false" aria-controls="collapseHref">
+                    <i class="fas fa-link me-2"></i> Enlaces: th:href
+                </button>
+            </h2>
+            <div id="collapseHref" class="accordion-collapse collapse" aria-labelledby="headingHref" data-bs-parent="#thymeleafAccordion">
+                <div class="accordion-body">
+                    <strong>th:href</strong> se utiliza para definir la URL de un enlace.
+                    <pre><code>&lt;a th:href="@{/pagina}"&gt;Enlace a la página&lt;/a&gt;</code></pre>
+                    Ejemplo: Si la ruta es <code>/pagina</code>, el enlace apuntará a <code>/pagina</code>.
+                </div>
+            </div>
+        </div>
+        <!-- th:selected -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingSelected">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSelected" aria-expanded="false" aria-controls="collapseSelected">
+                    <i class="fas fa-check-square me-2"></i> Selección: th:selected
+                </button>
+            </h2>
+            <div id="collapseSelected" class="accordion-collapse collapse" aria-labelledby="headingSelected" data-bs-parent="#thymeleafAccordion">
+                <div class="accordion-body">
+                    <strong>th:selected</strong> se utiliza para seleccionar automáticamente una opción en un elemento <code>select</code> cuando se cumple una condición.
+                    <pre><code>&lt;select th:field="*{selectedOption}"&gt;
+    &lt;option value="opcion1" th:selected="${selectedOption == 'opcion1'}"&gt;Opción 1&lt;/option&gt;
+    &lt;option value="opcion2" th:selected="${selectedOption == 'opcion2'}"&gt;Opción 2&lt;/option&gt;
+    &lt;option value="opcion3" th:selected="${selectedOption == 'opcion3'}"&gt;Opción 3&lt;/option&gt;
+&lt;/select&gt;</code></pre>
+                </div>
+            </div>
+        </div>
+        <!-- Etiquetas para clases y estilos dinámicos -->
+        <!-- th:class -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingClass">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseClass" aria-expanded="false" aria-controls="collapseClass">
+                    <i class="fas fa-paint-brush me-2"></i> Estilos: th:class
+                </button>
+            </h2>
+            <div id="collapseClass" class="accordion-collapse collapse" aria-labelledby="headingClass" data-bs-parent="#thymeleafAccordion">
+                <div class="accordion-body">
+                    <strong>th:class</strong> se utiliza para agregar clases CSS a un elemento HTML en función de una condición.
+                    <pre><code>&lt;div th:class="${condition} ? 'clase-activa' : 'clase-inactiva'"&gt;Elemento con clase dinámica&lt;/div&gt;</code></pre>
+                </div>
+            </div>
+        </div>
+        <!-- th:style -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingStyle">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseStyle" aria-expanded="false" aria-controls="collapseStyle">
+                    <i class="fas fa-palette me-2"></i> Estilos: th:style
+                </button>
+            </h2>
+            <div id="collapseStyle" class="accordion-collapse collapse" aria-labelledby="headingStyle" data-bs-parent="#thymeleafAccordion">
+                <div class="accordion-body">
+                    <strong>th:style</strong> se utiliza para aplicar estilos CSS a un elemento HTML en función de una condición.
+                    <pre><code>&lt;div th:style="${condition} ? 'color: red;' : 'color: green;'"&gt;Texto con estilo dinámico&lt;/div&gt;</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

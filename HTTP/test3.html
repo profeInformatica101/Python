@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio: Configuración de un Entorno Web</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container my-5">
+        <div class="text-center mb-4">
+            <h1 class="display-4">
+                <i class="fas fa-code"></i> Configuración de un Entorno Web
+            </h1>
+            <p class="lead">Ejercicio para aprender la gestión de usuarios, grupos y permisos en un entorno Linux.</p>
+        </div>
+
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h3><i class="fas fa-user"></i> Usuarios y Contraseñas</h3>
+            </div>
+            <div class="card-body">
+                <p>Se crearán los siguientes usuarios para la gestión del entorno web:</p>
+                <ul class="list-group">
+                    <li class="list-group-item"><i class="fas fa-user-circle"></i> <strong>webadmin</strong>: Contraseña <code>admin123</code></li>
+                    <li class="list-group-item"><i class="fas fa-user-circle"></i> <strong>developer1</strong>: Contraseña <code>dev123</code></li>
+                    <li class="list-group-item"><i class="fas fa-user-circle"></i> <strong>developer2</strong>: Contraseña <code>dev456</code></li>
+                    <li class="list-group-item"><i class="fas fa-user-circle"></i> <strong>tester</strong>: Contraseña <code>test123</code></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card shadow mt-4">
+            <div class="card-header bg-success text-white">
+                <h3><i class="fas fa-users"></i> Grupos</h3>
+            </div>
+            <div class="card-body">
+                <p>Se definirán los siguientes grupos de trabajo:</p>
+                <ul class="list-group">
+                    <li class="list-group-item"><i class="fas fa-users-cog"></i> <strong>admins</strong>: Incluye al usuario <code>webadmin</code></li>
+                    <li class="list-group-item"><i class="fas fa-users"></i> <strong>developers</strong>: Incluye a <code>developer1</code> y <code>developer2</code></li>
+                    <li class="list-group-item"><i class="fas fa-vial"></i> <strong>testers</strong>: Incluye al usuario <code>tester</code></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card shadow mt-4">
+            <div class="card-header bg-info text-white">
+                <h3><i class="fas fa-folder-open"></i> Directorios</h3>
+            </div>
+            <div class="card-body">
+                <p>Se crearán los siguientes directorios con permisos específicos:</p>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <i class="fas fa-folder"></i> <strong>/var/www/webproject</strong><br>
+                        <span class="text-muted">Raíz del proyecto web. Los permisos son:</span>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> <code>webadmin</code>: Acceso total</li>
+                            <li><i class="fas fa-check-circle"></i> <code>developers</code>: Acceso total</li>
+                            <li><i class="fas fa-eye"></i> <code>testers</code>: Solo lectura</li>
+                        </ul>
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-folder"></i> <strong>/var/www/webproject/dev</strong><br>
+                        <span class="text-muted">Directorio para desarrollo.</span>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> <code>webadmin</code> y <code>developers</code>: Acceso total</li>
+                            <li><i class="fas fa-ban"></i> <code>testers</code>: Sin acceso</li>
+                        </ul>
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-folder"></i> <strong>/var/www/webproject/test</strong><br>
+                        <span class="text-muted">Directorio para pruebas.</span>
+                        <ul>
+                            <li><i class="fas fa-check-circle"></i> <code>webadmin</code>: Acceso total</li>
+                            <li><i class="fas fa-check-circle"></i> <code>developers</code>: Acceso total</li>
+                            <li><i class="fas fa-eye"></i> <code>testers</code>: Solo lectura</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card shadow mt-4">
+            <div class="card-header bg-secondary text-white">
+                <h3><i class="fas fa-terminal"></i> Script para Configuración</h3>
+            </div>
+            <div class="card-body">
+                <p>Usa el siguiente script para automatizar la configuración:</p>
+                <pre><code class="language-bash">
+#!/bin/bash
+# Crear usuarios con contraseñas
+users=("webadmin:admin123" "developer1:dev123" "developer2:dev456" "tester:test123")
+for user_pass in "${users[@]}"; do
+    user=$(echo $user_pass | cut -d':' -f1)
+    pass=$(echo $user_pass | cut -d':' -f2)
+    sudo useradd -m -s /bin/bash "$user"
+    echo -e "$pass\n$pass" | sudo passwd "$user"
+done
+# Crear grupos y asignar usuarios
+sudo groupadd admins
+sudo groupadd developers
+sudo groupadd testers
+sudo usermod -aG admins webadmin
+sudo usermod -aG developers developer1 developer2
+sudo usermod -aG testers tester
+# Crear directorios
+sudo mkdir -p /var/www/webproject/dev
+sudo mkdir -p /var/www/webproject/test
+sudo chown webadmin:admins /var/www/webproject
+sudo chmod 770 /var/www/webproject
+                </code></pre>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

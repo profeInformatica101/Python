@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tareas: Debugger en Java (Ejemplo 2)</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .card {
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .card-header {
+            background-color: #28a745;
+            color: white;
+            font-weight: bold;
+        }
+
+        .card-header i {
+            margin-right: 10px;
+        }
+
+        .list-group-item i {
+            margin-right: 10px;
+        }
+
+        .objective {
+            background-color: #e9ecef;
+            border-radius: 10px;
+            padding: 15px;
+        }
+
+        pre {
+            background-color: #f1f1f1;
+            padding: 15px;
+            border-radius: 10px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Tareas para Probar el Debugger <i class="bi bi-bug-fill"></i></h1>
+        
+        <div class="card shadow-lg">
+            <div class="card-header">
+                <i class="bi bi-code-square"></i> Código Java con Error
+            </div>
+            <div class="card-body">
+                <pre>
+package com.ejemplos.debugger;
+
+public class Ejemplo2 {
+    public static void main(String[] args) {
+        int n = 5;
+        int[] tabla = new int[n];
+        
+        tabla = llenar(n);
+        int suma = sumar(tabla);
+        
+        System.out.println("La suma es: " + suma);
+    }
+
+    private static int[] llenar(int n) {
+        int[] tabla = new int[3]; // Error: tamaño fijo de 3 en lugar de usar 'n'
+        for (int i = 0; i < n; i++) { // Esto causará un error de índice fuera de rango
+            tabla[i] = i * 10;
+        }
+        return tabla;
+    }
+
+    private static int sumar(int[] tabla) {
+        int suma = 0;
+        int n = tabla.length;
+        for (int i = 0; i < n; i++) 
+            suma = suma + tabla[i];
+        return suma;
+    }
+}
+                </pre>
+            </div>
+        </div>
+
+        <div class="card shadow-lg">
+            <div class="card-header">
+                <i class="bi bi-bug-fill"></i> 1. Identificar el error en el método <code>llenar</code>
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    <li class="list-group-item"><i class="bi bi-arrow-right"></i> Establece un breakpoint en la línea donde se declara <code>int[] tabla = new int[3]</code>.</li>
+                    <li class="list-group-item"><i class="bi bi-arrow-right"></i> Observa que el tamaño del array no corresponde con el valor de <code>n</code>.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card shadow-lg">
+            <div class="card-header">
+                <i class="bi bi-play-circle-fill"></i> 2. Depurar el bucle para verificar el error de índice
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    <li class="list-group-item"><i class="bi bi-arrow-right"></i> Establece un breakpoint dentro del bucle <code>for</code> del método <code>llenar</code>.</li>
+                    <li class="list-group-item"><i class="bi bi-arrow-right"></i> Observa cómo <code>i</code> excede el tamaño del array, causando un error de índice fuera de rango.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card shadow-lg">
+            <div class="card-header">
+                <i class="bi bi-arrow-down-square-fill"></i> 3. Evaluar expresiones durante la depuración
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    <li class="list-group-item"><i class="bi bi-arrow-right"></i> Establece un breakpoint en la línea donde se inicializa <code>tabla[i]</code>.</li>
+                    <li class="list-group-item"><i class="bi bi-arrow-right"></i> Usa la funcionalidad <strong>Evaluate Expression</strong> y verifica los siguientes valores:</li>
+                    <ul>
+                        <li class="list-group-item"><i class="bi bi-dash"></i> <code>tabla.length</code> (debería ser 3 en lugar de 5).</li>
+                        <li class="list-group-item"><i class="bi bi-dash"></i> <code>n</code> (valor inicial de 5).</li>
+                        <li class="list-group-item"><i class="bi bi-dash"></i> <code>i</code> (cuando excede el rango).</li>
+                    </ul>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card shadow-lg">
+            <div class="card-header">
+                <i class="bi bi-arrow-up-square-fill"></i> 4. Corregir el tamaño del array y validar
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    <li class="list-group-item"><i class="bi bi-arrow-right"></i> Corrige el tamaño del array en el método <code>llenar</code> usando <code>int[] tabla = new int[n]</code>.</li>
+                    <li class="list-group-item"><i class="bi bi-arrow-right"></i> Vuelve a ejecutar el programa en modo depuración y valida el correcto funcionamiento.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="objective mt-4">
+            <h4>Objetivo General</h4>
+            <p>Este ejercicio enseña a los estudiantes a:</p>
+            <ul>
+                <li><i class="bi bi-check-circle-fill"></i> Identificar errores de tamaño en arrays.</li>
+                <li><i class="bi bi-check-circle-fill"></i> Inspeccionar variables y detectar errores de índice fuera de rango.</li>
+                <li><i class="bi bi-check-circle-fill"></i> Evaluar expresiones clave durante la depuración para validar hipótesis.</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

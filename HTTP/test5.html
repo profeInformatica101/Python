@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seguridad Informática - Unidad 3</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <header class="text-center mb-5">
+            <h1 class="fw-bold">Seguridad Informática</h1>
+            <h3>Unidad 3: Seguridad Lógica</h3>
+            <h4>2º SMR :: IES Camas - Antonio Brisquet</h4>
+            <h5>Curso 2024-25</h5>
+        </header>
+        
+        <div class="card shadow-lg mb-4">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">1. Administración de usuarios y permisos en Linux</h5>
+            </div>
+            <div class="card-body">
+                <p>¿Qué comandos usarías para realizar las siguientes tareas?</p>
+                <ol>
+                    <li>Crear tres usuarios: <code>usuario1</code>, <code>usuario2</code> y <code>usuario3</code>.</li>
+                    <li>Crear dos grupos: <code>grupo1</code> y <code>grupo2</code>.</li>
+                    <li>Agregar:
+                        <ul>
+                            <li><code>usuario1</code> y <code>usuario2</code> al grupo <code>grupo1</code>.</li>
+                            <li><code>usuario3</code> al grupo <code>grupo2</code>.</li>
+                        </ul>
+                    </li>
+                    <li>Configurar permisos en las carpetas:
+                        <ul>
+                            <li><code>/proyecto1</code>: acceso total (lectura, escritura y ejecución) solo para los miembros de <code>grupo1</code>.</li>
+                            <li><code>/proyecto2</code>:
+                                <ul>
+                                    <li>Lectura y escritura para los miembros de <code>grupo2</code>.</li>
+                                    <li>Solo lectura para los miembros de <code>grupo1</code>.</li>
+                                </ul>
+                            </li>
+                            <li><code>/compartido</code>: acceso total para todos los usuarios.</li>
+                            <li><code>/privado</code>: acceso exclusivo para <code>usuario1</code>.</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="card shadow-lg mb-4">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0">2. Seguridad AAA</h5>
+            </div>
+            <div class="card-body">
+                <p>En el contexto de AAA, realiza lo siguiente:</p>
+                <ol>
+                    <li>Define qué es el <strong>Accounting</strong> (Auditoría).</li>
+                    <li>Define qué es la <strong>Autenticación</strong>.</li>
+                    <li>Define qué es la <strong>Autorización</strong>.</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="card shadow-lg mb-4">
+            <div class="card-header bg-info text-white">
+                <h5 class="mb-0">3. Análisis de contraseñas</h5>
+            </div>
+            <div class="card-body">
+                <p>Una contraseña tiene 11 caracteres y está compuesta por letras minúsculas, letras mayúsculas, números y 10 símbolos diferentes. (El alfabeto latino tiene 26 letras).</p>
+                <ol>
+                    <li>Calcula cuántas contraseñas posibles existen con esas características.</li>
+                    <li>Si dispones de un equipo capaz de probar 25 mil millones de contraseñas por segundo:
+                        <ul>
+                            <li>¿Cuántas horas, como máximo, se tardaría en hackear la contraseña?</li>
+                            <li>¿Cuántas horas, en promedio, se tardaría en hackearla?</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="card shadow-lg mb-4">
+            <div class="card-header bg-warning text-dark">
+                <h5 class="mb-0">4. Ficheros en Linux</h5>
+            </div>
+            <div class="card-body">
+                <p>Indica qué información contienen los siguientes ficheros en Linux y quién puede acceder a ellos para lectura y para escritura/modificación:</p>
+                <ol>
+                    <li><code>/etc/passwd</code></li>
+                    <li><code>/etc/shadow</code></li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="card shadow-lg mb-4">
+            <div class="card-header bg-danger text-white">
+                <h5 class="mb-0">5. Proceso interno en Linux</h5>
+            </div>
+            <div class="card-body">
+                <ol>
+                    <li>Explica el proceso interno completo que realiza Linux para comprobar una contraseña de usuario durante el proceso de login.</li>
+                    <li>Explica el proceso interno completo que realiza Linux cuando se crea una contraseña para un usuario nuevo.</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="card shadow-lg mb-4">
+            <div class="card-header bg-secondary text-white">
+                <h5 class="mb-0">6. Seguridad lógica</h5>
+            </div>
+            <div class="card-body">
+                <p>Indica cuáles de las siguientes políticas de seguridad corresponden a la seguridad lógica:</p>
+                <ul>
+                    <li>Normas sobre la instalación de aplicaciones en los equipos.</li>
+                    <li>Normas sobre contraseñas aceptables.</li>
+                    <li>Normas sobre el registro y auditoría de acciones en el sistema.</li>
+                    <li>Normas sobre los permisos de acceso de los usuarios a las distintas carpetas de archivos.</li>
+                    <li>Normas de acceso al CPD (Centro de Procesamiento de Datos).</li>
+                    <li>Normas sobre la asignación de recursos de CPU, memoria y disco a los usuarios.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
