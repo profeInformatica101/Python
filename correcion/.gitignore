@@ -1,0 +1,6 @@
+# Archivos de corrección
+*.csv
+correccion_endes.csv
+
+# Exportaciones locales
+entregas/
